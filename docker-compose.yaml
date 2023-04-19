@@ -2,17 +2,18 @@ version: '3'
 
 services:
 
-  backend:  
-    container_name: backend
-    image: backend
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
+  mongo:
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: mongo
+      MONGO_INITDB_ROOT_PASSWORD: 123456
     ports:
-      - "8080:8080"
+      - "27017:27017"
+    volumes:
+      - /home/fullzer4/Docker/Volumes/MongoDB:/data/db
     networks:
-      - postgres-compose-network
+      - mongo-compose-network
   
 networks: 
-  postgres-compose-network:
+  mongo-compose-network:
     driver: bridge
